@@ -1,0 +1,10 @@
+{
+  "name": "jsconsole-bot",
+  "version": "0.0.1",
+  "description": "JS Console Telegram Bot",
+  "main": "index.js",
+  "repository": "https://github.com/OleksiyRudenko/jsconsole-bot.git",
+  "author": "OleksiyRudenko <oleksiy.rudenko@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
