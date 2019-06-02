@@ -2,9 +2,20 @@
   "name": "jsconsole-bot",
   "version": "0.0.1",
   "description": "JS Console Telegram Bot",
-  "main": "index.js",
   "repository": "https://github.com/OleksiyRudenko/jsconsole-bot.git",
   "author": "OleksiyRudenko <oleksiy.rudenko@gmail.com>",
+  "main": "./api/jsconsole-bot.js",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "micro": "^9.3.4",
+    "stringify-object": "^3.3.0",
+    "vm2": "^3.8.1"
+  }
 }

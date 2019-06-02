@@ -1,0 +1,174 @@
+:root {
+    font-family: Helvetica, "Open Sans", Arial, sans-serif;
+    --color-light:         #f9f9f9;
+    --color-dark:          #333;
+    --color-neutral:       #ddd;
+    --color-neutralDarker: #aaa;
+
+    --color-accent:         #428bca;
+    --color-accentFocus: 	#5bc0de;
+    --color-alert:    #d9534f;
+    --color-positive:  #5cb85c;
+
+    display:    flex;
+    flex-flow:  column;
+    min-height: 100%;
+    min-width:  100%;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    flex: 1;
+
+    padding: 1rem;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    min-height: 100%;
+    min-width: 100%;
+}
+
+header, footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    margin: -1rem;
+    padding: 1rem;
+
+    display: flex;
+    flex-flow: row;
+}
+
+main {
+    margin: -1rem;
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    flex-flow: row;
+}
+
+nav > * {
+    margin-right: 2rem;
+}
+
+footer > *:last-child {
+    margin-left: auto; /* makes the last (an the first if the only) element in footer floating to the right */
+}
+
+a {
+    color: inherit;
+    text-decoration-style: dotted;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline solid;
+}
+
+p {
+    text-align: justify;
+}
+
+pre, code {
+    font-family: "Overpass Mono", Courier, monospace;
+    font-size: 0.9em;
+}
+
+h4 {
+    font-size: 1.1rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+h6 {
+    font-size: 0.9rem;
+}
+
+/* === Form controls === */
+button, input {
+    line-height: 2rem;
+    font-size: 1.2rem;
+    min-width: 10rem;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+}
+
+button, input[type=submit], input[type=reset], input[type=button] {
+    cursor: pointer;
+}
+
+input[type=submit], button {
+    color: var(--color-light);
+    background-color: var(--color-accent);
+    border-color: calc(var(--color-accent) * 0.9);
+}
+
+button[type=button], button[type=reset], input[type=reset], input[type=button] {
+    color: var(--color-dark);
+    background-color: var(--color-neutral);
+    border-color: calc(var(--color-neutral) * 0.9);
+}
+
+button:hover, input:hover, input[type=submit]:hover, input[type=reset]:hover, input[type=button]:hover {
+    outline: none;
+    border-color: var(--color-accentFocus);
+    box-shadow: 0 0 1rem #66d;
+}
+
+input[type=radio], input[type=checkbox] {
+    min-width: 0.1em;
+}
+
+/* === Table ==- */
+
+table {
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+th, td {
+    border: 1px solid var(--color-neutralDarker);
+    padding: 0.3em 0.5em;
+}
+
+th, tfoot td {
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+}
+
+th, tfoot td {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--color-light);
+}
+
+tr:nth-child(even) {
+    background-color: var(--color-neutral);
+}
+
+tr:hover {
+    background-color: var(--color-accentFocus);
+}
+
+
+/* === Grouping === */
+
+fieldset {
+    margin: 0.5rem;
+}

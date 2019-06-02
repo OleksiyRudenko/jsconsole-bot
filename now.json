@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "jsconsole-bot",
+  "builds": [
+    { "src": "www/**/*", "use": "@now/static" },
+    { "src": "api/**/*.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "www/index.html" },
+    { "src": "/start_bot", "methods": ["POST"], "dest": "api/jsconsole-bot.js" }
+  ],
+  "env": {
+    "TELEGRAM_API_TOKEN": "@jsconsole_bot_telegram_api_token"
+  }
+}
