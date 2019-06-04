@@ -21,9 +21,8 @@ _USAGE_
 
 if [ $# -gt 0 ]; then
     case $1 in
-            install )     usage
-                          # yarn install
-                          # npm install -g now
+            install )     yarn install
+                          npm install -g now
                           exit
                           ;;
             login )       if [ "$2" != "" ]; then
