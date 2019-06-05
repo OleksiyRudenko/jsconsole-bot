@@ -1,8 +1,8 @@
 'use strict';
 
-const telegramApiUrl = "https://api.telegram.org/bot" +
-  process.env.TELEGRAM_API_TOKEN +
-  "/sendMessage";
+const replyToUrl = process.env.TELEGRAM_API_TOKEN
+  ? "https://api.telegram.org/bot" + process.env.TELEGRAM_API_TOKEN + "/sendMessage"
+  : "SENDER";
 
 const sandBoxRestrictions = {
   maxSourceCodeLength: {
@@ -25,4 +25,4 @@ const sandBoxConfig = {
 
 exports.sandBoxRestrictions = sandBoxRestrictions;
 exports.sandBoxConfig = sandBoxConfig;
-exports.telegramApiUrl = telegramApiUrl;
+exports.replyToUrl = replyToUrl;

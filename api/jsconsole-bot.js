@@ -1,13 +1,15 @@
 const { executeInASandbox } = require('./sandbox.js');
-const { telegramApiUrl } = require('./config.js');
+const { replyToUrl } = require('./config.js');
 const axios = require('axios');
 const { json } = require('micro');
+const stringifyObject = require('stringify-object');
 
 const jsConsoleBot = async (req, res) => {
   let reqBody;
-  // the following code fragment is required by zeit.now
+  // the following code fragment is required by async nature of POST request
   reqBody = await json(req);
   const { message } = reqBody;
+
   if (!message || !message.text) {
     const requestError = 'JSConsoleBot Error. Bad request: ' + JSON.stringify(reqBody, null, 2);
     console.error(requestError);
@@ -15,7 +17,21 @@ const jsConsoleBot = async (req, res) => {
     return;
   }
 
+  /* console.log("Request:", stringifyObject(req.headers['x-forwarded-for'], {
+    indent: '  ',
+    singleQuotes: false,
+    inlineCharacterLimit: 12,
+  }), stringifyObject(req.connection.remoteAddress, {
+    indent: '  ',
+    singleQuotes: false,
+    inlineCharacterLimit: 12,
+  })); */
+
   console.log('JSConsoleBot Message received: ' + JSON.stringify(message, null, 2));
+
+  const sendMessageToUrl = replyToUrl === 'SENDER'
+    ? 'SENDER'
+    : replyToUrl;
 
   const command = message && message.text.toLowerCase().split(' ')[0];
   let reply;
@@ -35,7 +51,7 @@ const jsConsoleBot = async (req, res) => {
     default:
       reply = "Unknown command. Send me /help or /js";
   }
-  sendMessage(telegramApiUrl, message, reply, res);
+  sendMessage(sendMessageToUrl, message, reply, res);
 };
 
 function emulateConsoleInput(string) {
@@ -43,8 +59,18 @@ function emulateConsoleInput(string) {
 }
 
 function sendMessage(url, message, reply, res){
+  if (url === "SENDER") {
+    const data = JSON.stringify({
+      text: reply,
+      chat_id: (message.chat && message.chat.id) || null,
+      parse_mode: 'markdown',
+    });
+    res.end(data);
+    console.log("JSConsoleBot Message posted", data);
+    return;
+  }
   axios.post(url, {
-    chat_id: message.chat.id,
+    chat_id: (message.chat && message.chat.id) || null,
     text: reply,
     parse_mode: 'markdown',
   }).then(() => { // response omitted
