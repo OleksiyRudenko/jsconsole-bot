@@ -119,8 +119,18 @@ The below instructions are valid as of June 03, 2019
 You are expected to have the following installed:
 - NodeJS and npm.
   [NodeJS v8.10.0](https://nodejs.org/en/blog/release/v8.10.0/)
-  is recommended (now uses this version)
+  is recommended (`now` hosting uses this version)
 - [yarn](https://yarnpkg.com/en/docs/install) package manager
+
+<details><summary>Note on NodeJS</summary>
+<p>
+It is recommended to use [nvm](https://github.com/nvm-sh/nvm/releases)
+or [nvm for Windows](https://github.com/coreybutler/nvm-windows)
+to manage NodeJS versions.
+
+Under Windows open `cmd.exe` or `PowerShell` as administrator to use `nvm`.
+</p>
+</details>
 
 Set up account on [zeit](https://zeit.co/). Integration with
 GitHub is optional.
