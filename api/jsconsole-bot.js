@@ -2,6 +2,11 @@ const { executeInASandbox } = require('./sandbox.js');
 const { telegramApiUrl } = require('./config.js');
 const axios = require('axios');
 const { json } = require('micro');
+const { snippets } = require('./snippets.js');
+
+const noCodeMessage = "I received no code to execute.\nFeed me something, e.g. `/js 0.1 + 0.2`\n"+
+  "I am OK with multiline input (using Shift-Enter).\n"+
+  "My version is 1.1.0\n\nMeanwhile I execute a random JS snippet for you\n\n";
 
 const jsConsoleBot = async (req, res) => {
   let reqBody;
@@ -25,12 +30,12 @@ const jsConsoleBot = async (req, res) => {
       break;
     case '/js':
       let sourceCode = message.text.substring(3).trim();
-      if (sourceCode.length) {
-        const result = executeInASandbox(sourceCode);
-        reply = "```\n" + emulateConsoleInput(sourceCode) + '\n' + result + "\n```";
-      } else {
-        reply = "No code to execute."
+      if (!sourceCode.length) {
+        reply = noCodeMessage;
+        sourceCode = snippets[Math.floor(Math.random() * snippets.length)]
       }
+      const result = executeInASandbox(sourceCode);
+      reply += "```\n" + emulateConsoleInput(sourceCode) + '\n' + result + "\n```";
       break;
     default:
       reply = "Unknown command. Send me /help or /js";
