@@ -2,8 +2,8 @@
   "version": 2,
   "name": "jsconsole-bot",
   "builds": [
-    { "src": "www/**/*", "use": "@now/static" },
-    { "src": "api/**/*.js", "use": "@now/node" }
+    { "src": "www/**/*", "use": "@vercel/static" },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/", "dest": "www/index.html" },
