@@ -4,9 +4,10 @@ const axios = require('axios');
 const { json } = require('micro');
 const { snippets } = require('./snippets.js');
 
-const noCodeMessage = "I received no code to execute.\nFeed me something, e.g. `/js 0.1 + 0.2`\n"+
-  "I am OK with multiline input (using Shift-Enter).\n"+
-  "My version is 1.1.0\n\nMeanwhile I execute a random JS snippet for you\n\n";
+const noCodeMessage = "I received no code to execute.\nFeed me something, e.g. `/js 0.1 + 0.2`\n" +
+  "I am OK with multiline input (using Shift-Enter).\n" +
+  "My version is 1.1.1\nFork me or star me on [GitHub](https://github.com/OleksiyRudenko/jsconsole-bot)\n\n" +
+  "Meanwhile I execute a random JS snippet for you\n\n";
 
 const jsConsoleBot = async (req, res) => {
   let reqBody;
@@ -23,7 +24,7 @@ const jsConsoleBot = async (req, res) => {
   console.log('JSConsoleBot Message received: ' + JSON.stringify(message, null, 2));
 
   const command = message && message.text.toLowerCase().split(' ')[0];
-  let reply;
+  let reply = '';
   switch (command) {
     case '/help':
       reply = "Send me /js command and some code. Multiline (Shift-Enter) is OK for me.";
@@ -35,7 +36,7 @@ const jsConsoleBot = async (req, res) => {
         sourceCode = snippets[Math.floor(Math.random() * snippets.length)]
       }
       const result = executeInASandbox(sourceCode);
-      reply += "```\n" + emulateConsoleInput(sourceCode) + '\n' + result + "\n```";
+      reply += "```\n" + emulateConsoleInput(sourceCode) + "\n\n" + result + "\n```";
       break;
     default:
       reply = "Unknown command. Send me /help or /js";
