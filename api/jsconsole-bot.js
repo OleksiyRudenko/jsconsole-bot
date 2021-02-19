@@ -6,7 +6,7 @@ const { snippets } = require('./snippets.js');
 
 const noCodeMessage = "I received no code to execute.\nFeed me something, e.g. `/js 0.1 + 0.2`\n" +
   "I am OK with multiline input (using Shift-Enter).\n" +
-  "My version is 1.1.1\nFork me or star me on [GitHub](https://github.com/OleksiyRudenko/jsconsole-bot)\n\n" +
+  "My version is 1.1.2\n\n" +
   "Meanwhile I execute a random JS snippet for you\n\n";
 
 const jsConsoleBot = async (req, res) => {
