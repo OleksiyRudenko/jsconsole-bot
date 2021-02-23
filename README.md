@@ -63,8 +63,8 @@ add it to any group chat.
     - [`config.js`](#configjs)
   - [Web presentation](#web-presentation)
   - [App deployment setup](#app-deployment-setup)
-    - [`.nowignore`](#nowignore)
-    - [`now.json`](#nowjson)
+    - [`.vercelignore`](#vercelignore)
+    - [`vercel.json`](#verceljson)
     - [`package.json`](#packagejson)
     - [`setup.sh`](#setupsh)
 - [Credits](#credits)
@@ -103,23 +103,22 @@ for details.
 
 ## Setup
 
-This app is developed to run on `now` platform by
-[zeit](https://zeit.co/now#whats-now).
+This app is developed to run on [`vercel`](https://vercel.com/docs) platform.
 
 Installation workflow:
 1. Install tools and dependencies
 1. Register the bot and store Telegram API access token
-1. Deploy bot as a lambda on `now`
+1. Deploy bot as a lambda on `vercel`
 1. Register bot webhook with Telegram 
 
-The below instructions are valid as of June 03, 2019
+The below instructions are valid as of February 23, 2021
 
 ### Install tools and dependencies
 
 You are expected to have the following installed:
 - NodeJS and npm.
-  [NodeJS v8.10.0](https://nodejs.org/en/blog/release/v8.10.0/)
-  is recommended (`now` hosting uses this version)
+  [NodeJS v12.13.0](https://nodejs.org/en/blog/release/v12.13.0/)
+  is recommended (`vercel` hosting uses NodeJS v10.x, v12.x, v14.x)
 - [yarn](https://yarnpkg.com/en/docs/install) package manager
 
 <details><summary>Note on NodeJS</summary>
@@ -132,39 +131,39 @@ Under Windows open `cmd.exe` or `PowerShell` as administrator to use `nvm`.
 </p>
 </details>
 
-Set up account on [zeit](https://zeit.co/). Integration with
+Set up account on [vercel](https://vercel.com/). Integration with
 GitHub is optional.
 
-`./setup.sh install` will install dependencies and `now` CLI
+`./setup.sh install` will install dependencies and `vercel` CLI
 
 You may need `sudo` installation.
 
-Once `now` CLI is installed it is recommended to login
+Once `vercel` CLI is installed it is recommended to login
 from your current device (normally it is done once for
-all projects supported with `now`).
+all projects supported with `vercel`).
 
-`./setup.sh login <your_email_associated_with_now_account>`
+`./setup.sh login <your_email_associated_with_vercel_account>`
 
 ### Register your bot
 
 Register your bot with [BotFather](https://telegram.me/botfather)
 and take a note of API access token.
 
-Store your token with `now` secrets storage.
+Store your token with `vercel` secrets storage.
 
 `.setup.sh save_token <telegram_api_token>`
 
 Now your token is securely stored and will be
-- available at every device you have logged into `now` from
-- supplied by `now` to the app at app execution
+- available at every device you have logged into `vercel` from
+- supplied by `vercel` to the app at app execution as an env variable
 
-You may list stored secrets with `now secrets ls`.
+You may list stored secrets with `vercel secrets ls`.
 You will not be able to retrieve the raw content of your secrets.
 However, you always can consult [BotFather](https://telegram.me/botfather) 
 to retrieve the token.
 
 It is recommended that you store all secrets like credentials,
-access tokens etc with a secrets storage, not as some plain text in
+access tokens etc with the secrets storage, not as some plain text in
 your code base.
 
 ### First deployment
@@ -172,7 +171,7 @@ your code base.
 `./setup.sh deploy`
 
 Take a note of the complete url of your end-point alias.
-Example: `https://jsconsole-bot.your-now-username.now.sh`
+Example: `https://jsconsole-bot-your-vercel-username.vercel.app`
 
 ### Register the bot web hook with Telegram
 
@@ -181,14 +180,14 @@ your bot.
 
 This end-point is called a web hook.
 
-`./setup.sh set_webhook <your_project_url.now.sh> <telegram_api_token>`
+`./setup.sh set_webhook <your_project_url.vercel.app> <telegram_api_token>`
 
 ### You're done!
 
 You may want change something in your bot code.
-Once you're ready to deploy just run `now`.
+Once you're ready to deploy just run `vercel`.
 
-Your projects are accessible via [dashboard](https://zeit.co/dashboard). 
+Your projects are accessible via [dashboard](https://vercel.com/dashboard). 
 Each project lists all deployments. You may want to
 delete obsolete deployments. You will also find logs useful. 
 
@@ -212,9 +211,9 @@ delete obsolete deployments. You will also find logs useful.
  |   \-- index.html          ## default index.html
  |
  |-- .gitignore
- |-- .nowignore    ## files to be ignore by now
+ |-- .vercelignore    ## files to be ignore by vercel
  |-- LICENSE.md
- |-- now.json      ## deployment setup
+ |-- vercel.json      ## deployment setup
  |-- package.json  ## project properties
  |-- README.md
  |-- setup.sh      ## setup script
@@ -225,14 +224,14 @@ delete obsolete deployments. You will also find logs useful.
 
 #### `jsconsole-bot.js`
 
-`now` requires app entry points to export functions 
+`vercel` requires app entry points to export functions 
 that are ready to serve network requests.
 Since Telegram API sends messages via POST
 and POST request body is not available synchronously
 the function exported is async and `micro` is employed
 to process the request properly.
 
-[now examples](https://github.com/zeit/now-examples/tree/master/nodejs)
+[vercel examples](https://vercel.com/docs/serverless-functions/supported-languages#node.js)
 demonstrate GET requests processing, which are synchronous.
 
 * `jsConsoleBot` (exported) - 
@@ -255,18 +254,18 @@ demonstrate GET requests processing, which are synchronous.
   by [yeoman](https://yeoman.io/)
   
 The project uses is tested under
-[NodeJS v8.10.0](https://nodejs.org/en/blog/release/v8.10.0/)
-that is 
-[used by zeit](https://zeit.co/docs/v2/deployments/official-builders/node-js-now-node#node.js-version)
+[NodeJS v12.13.0](https://nodejs.org/en/blog/release/v12.13.0/)
+that is one of NodeJS versions
+[used by vercel](https://vercel.com/docs/runtimes#official-runtimes/node-js)
 as of writing this docs.
 
-Newer NodeJS may cause 
+NodeJS versions between 8.x and 12.x may cause 
 [issues with output](https://github.com/patriksimek/vm2/issues/198).
 
 #### `config.js`
 
 * `telegramApiUrl` - [Telegram API](https://core.telegram.org/bots/api)
-  v~4.3 url to send responses
+  v5.0 url to send responses
   back to client; used in `jsconsole-bot.js`
 * `sandBoxRestrictions` - custom user code restrictions;
   used in `sandbox.js`
@@ -279,29 +278,36 @@ browser at app domain root.
 
 ### App deployment setup
 
-#### `.nowignore`
+#### `.vercelignore`
 
 Files that 
-[shouldn't be uploaded to `now`](https://zeit.co/guides/prevent-uploading-sourcepaths-with-nowignore).
+[shouldn't be uploaded to `vercel`](https://vercel.com/guides/prevent-uploading-sourcepaths-with-vercelignore).
 Normally those are files that aren't required to build a project
 and aren't used in production. 
 Syntax is similar to that of `.gitignore`.
 
-#### `now.json`
+#### `vercel.json`
 
-[`now` deployment configuration](https://zeit.co/docs/v2/deployments/configuration).
+[`vercel` deployment configuration](https://vercel.com/docs/configuration).
 
-* `version` - platform version
-* `name` - project name
+> **NB!** Current config uses legacy configuration approaches.
+> Should be upgraded to match the approach as documented
+> under the link above.
+
+* `version` - platform version (legacy)
+* `name` - project name (legacy)
 * `builds` - project build settings, defining e.g.
   which files are static and should be served as is,
   and which should be processed by NodeJS before deployment
+  (legacy)
 * `routes` - routing rules, defining e.g.
   what file to serve when a web user accesses project root
   and how a web hook (access point url) maps to a lambda
+  (legacy)
 * `env` - env variables, accessible via `process.env` object;
   when value starts with `@` the real value is taken from
-  `now` secrets storage
+  `vercel` secrets storage
+  (legacy)
 
 #### `package.json`
 
