@@ -12,7 +12,11 @@ const noCodeMessage = "I received no code to execute.\nFeed me something, e.g. `
 const jsConsoleBot = async (req, res) => {
   let reqBody;
   // the following code fragment is required by zeit.now
-  reqBody = await json(req);
+  try {
+    reqBody = await json(req);
+  } catch(e) {
+    console.error(e);
+  }
   const { message } = reqBody;
   if (!message || !message.text) {
     const requestError = 'JSConsoleBot Error. Bad request: ' + JSON.stringify(reqBody, null, 2);
