@@ -123,6 +123,7 @@ You are expected to have the following installed:
 
 <details><summary>Note on NodeJS</summary>
 <p>
+
 It is recommended to use [nvm](https://github.com/nvm-sh/nvm/releases)
 or [nvm for Windows](https://github.com/coreybutler/nvm-windows)
 to manage NodeJS versions.
