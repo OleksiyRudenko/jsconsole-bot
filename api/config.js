@@ -17,10 +17,8 @@ const sandBoxRestrictions = {
 
 const sandBoxConfig = {
   timeout: 3000,
-  sandbox: {},
-  console: 'redirect',
-  require: {
-    external: ['request'],
+  sandbox: {
+    console: {},
   },
   compiler: 'javascript',
   eval: false,

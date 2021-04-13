@@ -7,19 +7,24 @@ const stringifyObject = require('stringify-object');
 function executeInASandbox(sourceCode) {
   const validity = validate(sourceCode);
   if (!validity.isValid) return validity.message;
-  const vm = new VM(sandBoxConfig);
-  let result = '';
+  let result, logs = [];
+  const log = (...data) => {
+    console.log("log called with", data);
+    logs.push(data.join(' '));
+  }
   ['dir', 'error', 'info', 'log', 'trace', 'warn', ]
-    .forEach(consoleMethod => vm.on(`console.${consoleMethod}`, data => {
-      result += data + '\n';
-    }));
+    .forEach(consoleMethod => sandBoxConfig.sandbox.console[consoleMethod] = log);
+  const vm = new VM(sandBoxConfig);
   try {
-    result += vm.run(sourceCode);
+    result = vm.run(sourceCode);
   } catch (e) {
     console.log(e);
     return '' + e;
   }
-  return (validity.message.length ? validity.message + '\n' : '') + stringify(result);
+  console.log(logs);
+  return (validity.message.length ? validity.message + '\n' : '') +
+    logs.join('\n') + '\n' +
+    stringify(result);
 }
 
 function validate(sourceCode) {
