@@ -18,6 +18,8 @@ const jsConsoleBot = async (req, res) => {
     console.error(e);
   }
   const { message } = reqBody;
+  console.log(reqBody);
+  console.dir(reqBody);
   if (!message || !message.text) {
     const requestError = 'JSConsoleBot Error. Bad request: ' + JSON.stringify(reqBody, null, 2);
     console.error(requestError);
@@ -30,7 +32,10 @@ const jsConsoleBot = async (req, res) => {
   const command = message && message.text.toLowerCase().split(' ')[0];
   let reply = '';
   switch (command) {
-    case '/help':
+    case '/js-help':
+    case '/jshelp':
+    case '/jsbot-help':
+    case '/jsbothelp':
       reply = "Send me /js command and some code. Multiline (Shift-Enter) is OK for me.";
       break;
     case '/js':
@@ -42,8 +47,6 @@ const jsConsoleBot = async (req, res) => {
       const result = executeInASandbox(sourceCode);
       reply += "```\n" + emulateConsoleInput(sourceCode) + "\n\n" + result + "\n```";
       break;
-    default:
-      reply = "Unknown command. Send me /help or /js";
   }
   sendMessage(telegramApiUrl, message, reply, res);
 };
