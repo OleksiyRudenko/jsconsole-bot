@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "JS Console Telegram Bot",
   "repository": "https://github.com/OleksiyRudenko/jsconsole-bot.git",
-  "author": "OleksiyRudenko <oleksiy.rudenko@gmail.com>",
+  "author": "OleksiyRudenko <oleksiy.rudenko++git@gmail.com>",
   "main": "./api/jsconsole-bot.js",
   "license": "MIT",
   "private": false,
