@@ -18,8 +18,6 @@ const jsConsoleBot = async (req, res) => {
     console.error(e);
   }
   const { message } = reqBody;
-  console.log(reqBody);
-  console.dir(reqBody);
   if (!message || !message.text) {
     const requestError = 'JSConsoleBot Error. Bad request: ' + JSON.stringify(reqBody, null, 2);
     console.error(requestError);
@@ -27,7 +25,7 @@ const jsConsoleBot = async (req, res) => {
     return;
   }
 
-  console.log('JSConsoleBot Message received: ' + JSON.stringify(message, null, 2));
+  console.log('JSConsoleBot Message received:\n' + JSON.stringify(message, null, 2));
 
   const command = message && message.text.toLowerCase().split(' ')[0];
   let reply = '';
