@@ -10,7 +10,7 @@ const sandBoxRestrictions = {
     onErrorMessage: 'Source code max length is ',
   },
   warnOnOccurrence: {
-    value: ['console', 'require', 'setInterval', 'setTimeout', 'setImmediate'],
+    value: ['require', 'setInterval', 'setTimeout', 'setImmediate'],
     onErrorMessage: 'Warning! Neither of the following is supported: ',
   },
 };
@@ -18,6 +18,10 @@ const sandBoxRestrictions = {
 const sandBoxConfig = {
   timeout: 3000,
   sandbox: {},
+  console: 'redirect',
+  require: {
+    external: ['request'],
+  },
   compiler: 'javascript',
   eval: false,
   wasm: false,

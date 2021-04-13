@@ -93,7 +93,6 @@ The following restrictions are applied:
  * source code length
  * execution time
  * restricted native API:
-   - `console.log()` output isn't presented
    - `setTimeout`, `require`, `setInterval`, `setTimeout`, 
      `setImmediate` are unavailable
  

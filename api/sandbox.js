@@ -8,9 +8,13 @@ function executeInASandbox(sourceCode) {
   const validity = validate(sourceCode);
   if (!validity.isValid) return validity.message;
   const vm = new VM(sandBoxConfig);
-  let result;
+  let result = '';
+  ['dir', 'error', 'info', 'log', 'trace', 'warn', ]
+    .forEach(consoleMethod => vm.on(`console.${consoleMethod}`, data => {
+      result += data + '\n';
+    }));
   try {
-    result = vm.run(sourceCode);
+    result += vm.run(sourceCode);
   } catch (e) {
     console.log(e);
     return '' + e;
