@@ -23,7 +23,7 @@ function executeInASandbox(sourceCode) {
   }
   console.log(logs);
   return (validity.message.length ? validity.message + '\n' : '') +
-    logs.join('\n') + '\n' +
+    logs.join('\n') + (logs.length ? '\n' : '') +
     stringify(result);
 }
 

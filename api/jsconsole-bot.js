@@ -43,7 +43,7 @@ const jsConsoleBot = async (req, res) => {
         sourceCode = snippets[Math.floor(Math.random() * snippets.length)]
       }
       const result = executeInASandbox(sourceCode);
-      reply += "```\n" + emulateConsoleInput(sourceCode) + "\n" + result + "\n```";
+      reply += "```\n" + emulateConsoleInput(sourceCode) + "\n\n" + result + "\n```";
       break;
   }
   sendMessage(telegramApiUrl, message, reply, res);
