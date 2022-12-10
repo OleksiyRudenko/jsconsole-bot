@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "micro": "^9.3.4",
     "stringify-object": "^3.3.0",
     "vm2": "^3.8.1"
